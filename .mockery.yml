@@ -1,0 +1,43 @@
+# all: false
+# dir: '{{.InterfaceDir}}'
+# filename: mocks_test.go
+# force-file-write: true
+# formatter: goimports
+# generate: true
+# include-auto-generated: false
+# log-level: info
+# structname: '{{.Mock}}{{.InterfaceName}}'
+# pkgname: '{{.SrcPackageName}}'
+# recursive: false
+# require-template-schema-exists: true
+# template: testify
+# template-schema: '{{.Template}}.schema.json'
+# packages:
+#   github.com/vektra/mockery/v3/internal/fixtures:
+#     config:
+#       all: true
+
+# template: testify
+# packages:
+#   github.com/vektra/mockery/v3/pkg/fixtures:
+#     config:
+#       dir: "{{.InterfaceDir}}"
+#       filename: "mocks.go"
+#       pkgname: "test"
+#       structname: "Mock{{.InterfaceName}}"
+#     interfaces:
+#       Requester:
+
+dir: "{{.InterfaceDirRelative}}/mocks"
+structname: "{{.InterfaceName}}"
+filename: "{{ .InterfaceName | snakecase }}.go"
+pkgname: mocks
+recursive: true
+exclude-subpkg-regex:
+  - mocks
+force-file-write: true
+template: testify
+packages:
+  github.com/kevinssheva/go-backend-template/internal/service:
+    config:
+      all: true
